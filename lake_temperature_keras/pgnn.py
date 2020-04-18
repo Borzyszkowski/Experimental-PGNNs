@@ -87,7 +87,7 @@ class PhysicsGuidedNN:
         model = Sequential()
 
         model.add(Dense(self.n_nodes, activation='relu', input_shape=(np.shape(self.train_x)[1],)))
-        for _ in self.n_layers:
+        for _ in range(self.n_layers):
             model.add(Dense(self.n_nodes, activation='relu'))
         model.add(Dense(1, activation='linear'))
 
