@@ -71,7 +71,7 @@ class PhysicsGuidedNN:
 
         :return: train_x, train_y, test_x, test_y
         """
-        data = spio.loadmat("data\\x.mat", squeeze_me=True, variable_names=['Y', 'Xc_doy', 'Modeled_temp'])
+        data = spio.loadmat("data\\lake.mat", squeeze_me=True, variable_names=['Y', 'Xc_doy', 'Modeled_temp'])
         inputs = data['Xc_doy']
         outputs = data['Y']
 
