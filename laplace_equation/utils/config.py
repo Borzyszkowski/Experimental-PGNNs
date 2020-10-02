@@ -1,0 +1,5 @@
+import os
+
+MAX_TEMPERATURE = int(os.getenv("MAX_TEMPERATURE", 100))
+LAPLACE_MIN_BLOCK_SIZE = int(os.getenv("LAPLACE_MIN_BLOCK_SIZE", 1))
+LAPLACE_FIELD_SIZE = int(os.getenv("LAPLACE_FIELD_SIZE", 10))
