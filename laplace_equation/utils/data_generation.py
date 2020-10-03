@@ -3,8 +3,8 @@ import random
 import numpy as np
 import pandas as pd
 
-import config
-import result_generation
+from laplace_equation.utils import config
+from laplace_equation.utils import result_generation
 
 
 def generate_input_data(min_block_size, nb_samples=1000):

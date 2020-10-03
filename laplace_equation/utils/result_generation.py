@@ -1,8 +1,8 @@
 import numpy as np
 import pandas as pd
 
-import config
-from laplace_solver import LaplaceSolver
+from laplace_equation.utils import config
+from laplace_equation.utils.laplace_solver import LaplaceSolver
 
 
 def build_input_matrix(nominal_temp, boundary_cond):
@@ -40,7 +40,7 @@ def parse_input_file(input_file_name):
     :param input_file_name: input file with columns -> nominal_temperature, boundary_conditions
     """
     data = []
-
+    output_data = []
     # read all cases
     input_df = pd.read_csv(input_file_name)
     for index, row in input_df.iterrows():
@@ -55,11 +55,15 @@ def parse_input_file(input_file_name):
             solver.calculate()
 
             data += [[nominal_temperature, boundary_conditions, solver.matrix]]
-
+            output_data.append(solver.matrix)
+            if index % 100 == 0:
+                print(f"{index}/{len(input_df)} done")
         except Exception as e:
             print("Exception!! -> " + str(e))
             return -1
 
+    output_data = np.asarray(output_data)
+    np.save("output_data.npy", output_data)
     # save results
     output_df = pd.DataFrame(data, columns=["nominal_temperature", "boundary_conditions", "result"])
     output_df.to_csv("result.csv")
