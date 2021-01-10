@@ -1,8 +1,11 @@
 import numpy as np
+import scipy.io
 import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
+
 from lib.pinn import PINN
 from lib.optimizer import L_BFGS_B
+
 
 import tensorflow as tf
 
@@ -30,6 +33,9 @@ def generate_test_data_placeholders(num_test_samples):
 
 def display_results(t, x, u, x_flat):
     # plot u(t,x) distribution as a color-map
+    data = scipy.io.loadmat('./data/burgers_shock.mat')
+    real_data = np.real(data['usol']).T
+    x_real = data['x'].flatten()[:,None]
     fig = plt.figure(figsize=(7,4))
     gs = GridSpec(2, 3)
     plt.subplot(gs[0, :])
@@ -45,10 +51,12 @@ def display_results(t, x, u, x_flat):
         plt.subplot(gs[1, i])
         tx = np.stack([np.full(t_flat.shape, t_cs), x_flat], axis=-1)
         u = neural_network.predict(tx, batch_size=num_test_samples)
-        plt.plot(x_flat, u)
+        plt.plot(x_flat, u, label = 'prediction')
+        plt.plot(x_real, real_data[int(t_cs*100), :], label='real data')
         plt.title('t={}'.format(t_cs))
         plt.xlabel('x')
         plt.ylabel('u(t,x)')
+        plt.legend()
     plt.tight_layout()
     plt.show()
 
