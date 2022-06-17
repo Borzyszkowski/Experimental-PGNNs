@@ -41,8 +41,7 @@ differential equations for spatial analysis</h1>
 
 ## Experimental-PGNNs
 In this project, we present two applications of Physics-Guided Neural Networks (PGNN) and illustrate their advantages in theory by
-solving Poisson’s and Burger’s partial differential equations. The proposed formulas describe various real-world processes and have numerous
-applications in the area of applied mathematics. 
+solving Poisson’s and Burger’s partial differential equations. The proposed formulas describe various real-world processes and are widely used in the area of applied mathematics. 
 
 ### Setup
 * Install Python 3.6.7+ if not present on machine: https://www.python.org/downloads/release/python-367/
